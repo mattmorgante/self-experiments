@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OnboardingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
-    dd('hello world2');
     return view('welcome');
 });
+
+
+Route::get('/start', [OnboardingController::class, 'start']);
+Route::get('/goals', [OnboardingController::class, 'goals']);
+Route::get('/approaches', [OnboardingController::class, 'approaches']);
+Route::get('/plan', [OnboardingController::class, 'plan']);
