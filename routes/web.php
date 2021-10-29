@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OnboardingController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +13,17 @@ use App\Http\Controllers\OnboardingController;
 |
 */
 
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/start', [OnboardingController::class, 'start']);
-Route::get('/goals', [OnboardingController::class, 'goals']);
-Route::get('/approaches', [OnboardingController::class, 'approaches']);
-Route::get('/plan', [OnboardingController::class, 'plan']);
+
+Route::get('/start', function () {
+    return view('start');
+});
+
+require __DIR__.'/auth.php';
