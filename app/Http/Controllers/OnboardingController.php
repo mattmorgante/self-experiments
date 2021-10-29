@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Goal;
 
 class OnboardingController extends Controller
 {
@@ -14,9 +15,11 @@ class OnboardingController extends Controller
 
     public function showGoals()
     {
-        // query the db table goals 
-        // return all 
-        return view('goals');
+        $goals = Goal::take(10)->get();
+
+        return view('goals')->with([
+            'goals' => $goals
+        ]);
     }
 
     public function saveGoal($goalid)

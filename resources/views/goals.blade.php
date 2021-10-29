@@ -1,7 +1,7 @@
-<h1>What do you want to improve in your life?</h1>
+<p>What do you want to improve in your life?</p>
 
-<button>Lose Weight</button>
-<button>Learn a new skill</button>
-<button>Sleep better</button>
-<button>Have more energy</button>
-<button>Reduce Anxiety</button>
+@foreach ($goals as $goal)
+    <div>
+        <a class="btn" href="/approaches/{{ $goal->id }}">{{ $goal->name }}</a>
+    </div>
+@endforeach

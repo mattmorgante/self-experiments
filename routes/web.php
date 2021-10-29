@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoalsController;
+use App\Http\Controllers\PlansController;
+use App\Http\Controllers\ApproachesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +28,9 @@ Route::get('/dashboard', function () {
 Route::get('/start', function () {
     return view('start');
 });
+
+Route::get('/goals', [GoalsController::class, 'index']);
+Route::get('/approaches/{goal_id}', [ApproachesController::class, 'index']);
+Route::get('/plan/{goal_id}/{approach_id}', [PlansController::class, 'show']);
 
 require __DIR__.'/auth.php';
