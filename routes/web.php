@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalsController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ApproachesController;
+use App\Http\Controllers\SMSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,7 @@ Route::get('/approaches/{goal_id}', [ApproachesController::class, 'index']);
 Route::get('/plan/{goal_id}/{approach_id}', [PlansController::class, 'show']);
 Route::post('/plan/save', [PlansController::class, 'save']);
 Route::get('/thanks', [PlansController::class, 'thanks']);
+
+Route::post('/incoming-sms', [SMSController::class, 'incoming']);
 
 require __DIR__.'/auth.php';
