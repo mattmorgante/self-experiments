@@ -28,7 +28,7 @@ class SMSController extends Controller
             $client->messages->create('+19179435951',
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'It looks like you do not have any active plans, go to selfexperiments.com to create a new one!'
+                'body' => 'It looks like you do not have any active plans, go to selfexperiments.com to create a new one! Reply STOP to Unsubscribe'
                 )
             );
             return true;
@@ -43,7 +43,7 @@ class SMSController extends Controller
             $client->messages->create('+19179435951',
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'You already checked in for today! Wait until tomorrow\'s prompt to respond again.'
+                'body' => 'You already checked in for today! Wait until tomorrow\'s prompt to respond again. Reply STOP to Unsubscribe'
                 )
             );
             return true;
@@ -58,7 +58,7 @@ class SMSController extends Controller
             $client->messages->create('+19179435951',
                 array(
                     'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Nice, keep up the good work!'
+                    'body' => 'Nice, keep up the good work! Reply STOP to Unsubscribe'
                     )
                 );
             return true;
@@ -71,13 +71,13 @@ class SMSController extends Controller
             $client->messages->create('+19179435951',
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'Don\'t be too hard on yourself. Try again tomorrow!'
+                'body' => 'Don\'t be too hard on yourself. Try again tomorrow! Reply STOP to Unsubscribe'
                 )
             );
         return true;
             // update plan days
         }
-        \Log::info("Please respond either 'Yes' or 'No' to have your response recorded.");
+        \Log::info("Please respond either 'Yes' or 'No' to have your response recorded. Reply STOP to Unsubscribe");
         \Log::info('ok!!');
         return true;
         

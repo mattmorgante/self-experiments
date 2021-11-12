@@ -62,7 +62,7 @@ class SendTexts extends Command
                 $client->messages->create('+19179435951',
                 array(
                     'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Did you ' . $approach->name . ' today?'
+                    'body' => 'Did you ' . $approach->name . ' today? Reply STOP to Unsubscribe'
                     )
                 );
 
