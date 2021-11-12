@@ -1,8 +1,13 @@
-<p>You've decided to try to <b>{{ $goal->name }}</b> by <b>{{ $approach->name }}</b>.</p>
+<p>You've decided to try to <b>{{ $goal->name }}</b></p>
+<p>Your approach is to <b>{{ $approach->name }}</b>.</p>
 <p>Great choice! Let's make a plan to turn this goal into reality</p>
 
-<p>What is your current weight?</p>
-<input type="text" id="measurement"><br><br>
+<form method="POST" action="/plan/save">
+  @csrf
+<input type="hidden" value="{{$goal->id}}" name="goal_id">
+<input type="hidden" value="{{$approach->id}}" name="approach_id">
+<p>What is your current {{ $goal->measurement }}?</p>
+<input type="text" name="goal_initial" id="measurement"><br>
 
 
 <p>How many days do you want to run this experiment for?</p>
@@ -14,8 +19,10 @@
   </select>
 
 <p>We will text you everyday to see if you are sticking with the plan.</p> 
+<p>What is your phone number?</p>
+<input type="text" name="phone_number" id="phone-number"><br>
 <p>What time do you want to be texted?</p>
-<select>
+<select name="message_time">
     <option value="0">12:00 am</option>
     <option value="1">1:00 am</option>
     <option value="2">2:00 am</option>
@@ -41,5 +48,7 @@
     <option value="22">10:00 pm</option>
     <option value="23">11:00 pm</option>
   </select>
-
   <p>
+
+<input type="submit" value="Get Started">
+</form>  

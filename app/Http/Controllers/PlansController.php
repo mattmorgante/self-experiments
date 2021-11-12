@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Goal;
 use App\Models\Approach;
+use App\Models\Plan;
 
 class PlansController extends Controller
 {
@@ -21,7 +22,18 @@ class PlansController extends Controller
 
     public function save() 
     { 
-        // take the number of days & time of message and save to plans table
+        $plan = new Plan();
+        $plan->goal_id = request('goal_id');
+        $plan->approach_id = request('approach_id');
+        $plan->days = request('days');
+        $plan->goal_initial = request('goal_initial');
+        $plan->phone_number = request('phone_number');
+        $plan->message_time = request('message_time');
+        $plan->save();
+        return redirect('/thanks');
     }
 
+    public function thanks() {
+        return view('thanks');
+    }
 }
