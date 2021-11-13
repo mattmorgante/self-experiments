@@ -59,7 +59,7 @@ class SendTexts extends Command
                 $planDay->day_number = $diffInDays;
                 $planDay->save();
                 $approach = Approach::where('id', $plan->approach_id)->first();
-                $client->messages->create('+19179435951',
+                $client->messages->create($plan->phone_number,
                 array(
                     'from' => env('TWILIO_NUMBER'),
                     'body' => 'Did you ' . $approach->name . ' today?'

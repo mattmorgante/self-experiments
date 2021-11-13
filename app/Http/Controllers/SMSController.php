@@ -58,7 +58,7 @@ class SMSController extends Controller
             $client->messages->create($phoneNumber,
                 array(
                     'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Nice, keep up the good work! Reply STOP to Unsubscribe'
+                    'body' => 'Nice, keep up the good work!'
                     )
                 );
             return true;
