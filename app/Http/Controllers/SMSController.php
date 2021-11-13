@@ -25,10 +25,10 @@ class SMSController extends Controller
         \Log::info(json_encode($activePlan));
 
         if (!$activePlan) { 
-            $client->messages->create('+19179435951',
+            $client->messages->create($phoneNumber,
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'It looks like you do not have any active plans, go to selfexperiments.com to create a new one! Reply STOP to Unsubscribe'
+                'body' => 'It looks like you do not have any active plans, go to selfexperiments.com to create a new one!'
                 )
             );
             return true;
@@ -40,10 +40,10 @@ class SMSController extends Controller
             ->first();
         
         if (!$planDay) { 
-            $client->messages->create('+19179435951',
+            $client->messages->create($phoneNumber,
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'You already checked in for today! Wait until tomorrow\'s prompt to respond again. Reply STOP to Unsubscribe'
+                'body' => 'You already checked in for today! Wait until tomorrow\'s prompt to respond again.'
                 )
             );
             return true;
@@ -55,7 +55,7 @@ class SMSController extends Controller
             \Log::info('positive response');
             $planDay->outcome = TRUE;
             $planDay->save();
-            $client->messages->create('+19179435951',
+            $client->messages->create($phoneNumber,
                 array(
                     'from' => env('TWILIO_NUMBER'),
                     'body' => 'Nice, keep up the good work! Reply STOP to Unsubscribe'
@@ -68,20 +68,21 @@ class SMSController extends Controller
             \Log::info('negative response');
             $planDay->outcome = FALSE;
             $planDay->save();
-            $client->messages->create('+19179435951',
+            $client->messages->create($phoneNumber,
             array(
                 'from' => env('TWILIO_NUMBER'),
-                'body' => 'Don\'t be too hard on yourself. Try again tomorrow! Reply STOP to Unsubscribe'
+                'body' => 'Don\'t be too hard on yourself. Try again tomorrow!'
                 )
             );
-        return true;
+            return true;
             // update plan days
         }
-        \Log::info("Please respond either 'Yes' or 'No' to have your response recorded. Reply STOP to Unsubscribe");
-        \Log::info('ok!!');
+        $client->messages->create($phoneNumber,
+        array(
+            'from' => env('TWILIO_NUMBER'),
+            'body' => "Please respond either 'Yes' or 'No' to have your response recorded."
+            )
+        );
         return true;
-        
-        
-        // save to plan_days.outcome
     }
 }
