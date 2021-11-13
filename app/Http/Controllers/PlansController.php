@@ -27,7 +27,7 @@ class PlansController extends Controller
         $plan->approach_id = request('approach_id');
         $plan->days = request('days');
         $plan->goal_initial = request('goal_initial');
-        $plan->phone_number = request('phone_number');
+        $plan->phone_number = '+1' . request('phone_number');
         $plan->message_time = request('message_time');
         $plan->save();
         return redirect('/thanks');

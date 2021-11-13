@@ -7,11 +7,11 @@
 <input type="hidden" value="{{$goal->id}}" name="goal_id">
 <input type="hidden" value="{{$approach->id}}" name="approach_id">
 <p>What is your current {{ $goal->measurement }}?</p>
-<input type="text" name="goal_initial" id="measurement"><br>
+<input type="text" name="goal_initial" id="measurement" required><br>
 
 
 <p>How many days do you want to run this experiment for?</p>
-<select name="days">
+<select name="days" required>
     <option value="5">5</option>
     <option value="7">7</option>
     <option value="10">10</option>
@@ -20,9 +20,9 @@
 
 <p>We will text you everyday to see if you are sticking with the plan.</p> 
 <p>What is your phone number?</p>
-<input type="text" name="phone_number" id="phone-number"><br>
+<input type="tel" id="phone" name="phone_number" pattern="[0-9]{10}" required>
 <p>What time do you want to be texted?</p>
-<select name="message_time">
+<select name="message_time" required>
     <option value="0">12:00 am</option>
     <option value="1">1:00 am</option>
     <option value="2">2:00 am</option>
