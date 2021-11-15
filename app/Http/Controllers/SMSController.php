@@ -7,8 +7,6 @@ use Twilio\Rest\Client;
 use App\Models\Plan;
 use App\Models\PlanDay;
 
-
-
 class SMSController extends Controller
 {
     public function incoming(Request $request) 
@@ -22,7 +20,7 @@ class SMSController extends Controller
             ->where('status', 'PENDING')
             ->orderBy('created_at', 'DESC')
             ->first();
-        \Log::info(json_encode($activePlan));
+        \Log::info(json_encode($pendingPlan));
 
         if ($pendingPlan) { 
             \Log::info('completing plan');
@@ -37,6 +35,12 @@ class SMSController extends Controller
                 );
             return true;
         }
+
+        $activePlan = Plan::where('phone_number', $phoneNumber)
+            ->where('status', 'ACTIVE')
+            ->orderBy('created_at', 'DESC')
+            ->first();
+        \Log::info(json_encode($activePlan));
 
         if (!$activePlan) { 
             $client->messages->create($phoneNumber,
