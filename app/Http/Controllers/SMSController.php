@@ -18,21 +18,21 @@ class SMSController extends Controller
         $phoneNumber = $request->input('From');
         \Log::info($messageBody);
 
-        $activePlan = Plan::where('phone_number', $phoneNumber)
-            ->where('status', 'ACTIVE')
+        $pendingPlan = Plan::where('phone_number', $phoneNumber)
+            ->where('status', 'PENDING')
             ->orderBy('created_at', 'DESC')
             ->first();
         \Log::info(json_encode($activePlan));
 
-        if ($activePlan->status === 'PENDING') { 
-            \Log::info('completing plan response');
-            $activePlan->status = 'COMPLETE';
-            $activePlan->goal_end = $messageBody;
-            $activePlan->save();
+        if ($pendingPlan) { 
+            \Log::info('completing plan');
+            $pendingPlan->status = 'COMPLETE';
+            $pendingPlan->goal_end = $messageBody;
+            $pendingPlan->save();
             $client->messages->create($phoneNumber,
                 array(
                     'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Thanks for sharing. Here is a link to your plan summary (TODO)'
+                    'body' => 'Great work finishing your plan. Here is a link to your summary (TODO)'
                     )
                 );
             return true;
