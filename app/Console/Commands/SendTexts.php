@@ -61,7 +61,6 @@ class SendTexts extends Command
                     'body' => 'You have completed your plan! What is your current ' . $goal->measurement . '?'
                     )
                 );
-                dd('here');
             } else { 
                 $planDay = new PlanDay();
                 $planDay->plan_id = $plan->id;
