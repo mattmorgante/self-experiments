@@ -46,8 +46,8 @@ class SendTexts extends Command
 
         $client = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
 
-        $currentHour = Carbon::now()->format('H');
-        $plansToSend = Plan::where('message_time', $currentHour)->where('status', 'ACTIVE')->get();
+        $currentHourUTC = Carbon::now()->format('H');
+        $plansToSend = Plan::where('message_time', $currentHourUTC)->where('status', 'ACTIVE')->get();
         foreach ($plansToSend as $plan) { 
             $diffInDays = Carbon::parse($plan->created_at)->diffInDays(Carbon::now());
             if ($diffInDays > $plan->days) {

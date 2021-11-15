@@ -29,7 +29,12 @@ class PlansController extends Controller
         $plan->days = request('days');
         $plan->goal_initial = request('goal_initial');
         $plan->phone_number = '+' . request('countryCode') . request('phone_number');
-        $plan->message_time = request('message_time');
+        // convert time request to UTC 
+        // example i say i want my text at 16:00 
+        // and i live in eastern time (UTC -5)
+        // save my message_time to be 21; (16 - -5) = 21
+        $plan->message_time = request('message_time') - request('timezone');
+        
         $plan->save();
         $client = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
         $client->messages->create($plan->phone_number,

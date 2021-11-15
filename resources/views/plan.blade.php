@@ -240,7 +240,7 @@
 </select>
 <input type="tel" id="phone" name="phone_number" pattern="[0-9]{10}" required>
 <p>What is your time zone?</p>
-<select>
+<select name="timezone">
 	<option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
 	<option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
 	<option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
