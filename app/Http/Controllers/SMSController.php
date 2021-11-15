@@ -24,6 +24,20 @@ class SMSController extends Controller
             ->first();
         \Log::info(json_encode($activePlan));
 
+        if ($activePlan->status === 'PENDING') { 
+            \Log::info('completing plan response');
+            $activePlan->status = 'COMPLETE';
+            $activePlan->goal_end = $messageBody;
+            $activePlan->save();
+            $client->messages->create($phoneNumber,
+                array(
+                    'from' => env('TWILIO_NUMBER'),
+                    'body' => 'Thanks for sharing. Here is a link to your plan summary (TODO)'
+                    )
+                );
+            return true;
+        }
+
         if (!$activePlan) { 
             $client->messages->create($phoneNumber,
             array(

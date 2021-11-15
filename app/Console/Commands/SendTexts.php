@@ -7,6 +7,7 @@ use Twilio\Rest\Client;
 use App\Models\Plan;
 use App\Models\Approach;
 use App\Models\PlanDay;
+use App\Models\Goal;
 use Carbon\Carbon;
 
 class SendTexts extends Command
@@ -51,8 +52,16 @@ class SendTexts extends Command
         foreach ($plansToSend as $plan) { 
             $diffInDays = Carbon::parse($plan->created_at)->diffInDays(Carbon::now());
             if ($diffInDays > $plan->days) {
-                $plan->status = 'COMPLETE';
+                $plan->status = 'PENDING';
                 $plan->save();
+                $goal = Goal::where('id', $plan->goal_id)->first();
+                $client->messages->create($plan->phone_number,
+                array(
+                    'from' => env('TWILIO_NUMBER'),
+                    'body' => 'You have completed your plan! What is your current ' . $goal->measurement . '?'
+                    )
+                );
+                dd('here');
             } else { 
                 $planDay = new PlanDay();
                 $planDay->plan_id = $plan->id;
