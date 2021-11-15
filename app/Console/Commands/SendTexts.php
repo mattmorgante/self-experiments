@@ -42,7 +42,7 @@ class SendTexts extends Command
      */
     public function handle()
     {
-
+        \Log::info('starting send texts');
 
         $client = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
 

@@ -32137,6 +32137,11 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
