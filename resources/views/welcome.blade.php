@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div id="wrapper">
+<div class="wrapper">
     <div id="left">
         <div class="container">
             <h2>Want to make an improvement in your life?</h2>

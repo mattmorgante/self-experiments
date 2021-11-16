@@ -11,13 +11,13 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
-        <script src="{{ secure_asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <header class="header"><h1>Self Experiments</h1></header>
+        <header class="header"><h1><a href="/">Self Experiments</a></h1></header>
         @yield('content')
     </body>
 </html>

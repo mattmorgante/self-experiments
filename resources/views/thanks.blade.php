@@ -1,3 +1,7 @@
-<p>Thanks for making a self experiment!</p>
-<p>We will text you tomorrow at the designated time to check in!</p>
-<p>Do you want to <a href="/goals">make another experiment?</a></p>
+@extends('layouts.app')
+@section('content')
+<div class="form-header">
+	<h2 class="title">Thanks for making a self experiment!</h2>
+	<h2 class="title">We will text you tomorrow at the designated time to check in!</h2>
+</div>
+@stop

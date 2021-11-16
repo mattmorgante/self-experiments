@@ -1,27 +1,42 @@
-<p>You've decided to try to <b>{{ $goal->name }}</b></p>
-<p>Your approach is to <b>{{ $approach->name }}</b>.</p>
-<p>Great choice! Let's make a plan to turn this goal into reality</p>
+@extends('layouts.app')
+@section('content')
+<div class="form-header">
+	<h2 class="title">You've decided to try to <b>{{ $goal->name }}</b></h2>
+	<h2 class="title">Your approach is to <b>{{ $approach->name }}</b>.</h2>
+	<h2 class="title">Great choice! Let's make a plan to turn this goal into reality</h2>
+</div>
 
+<div class="form">
 <form method="POST" action="/plan/save">
   @csrf
 <input type="hidden" value="{{$goal->id}}" name="goal_id">
 <input type="hidden" value="{{$approach->id}}" name="approach_id">
-<p>What is your current {{ $goal->measurement }}?</p>
-<input type="text" name="goal_initial" id="measurement" required><br>
+<p class="form-element">What is your current {{ $goal->measurement }}?</p>
+<input class="form-input" type="text" name="goal_initial" id="measurement" required><br>
 
 
-<p>How many days do you want to run this experiment for?</p>
-<select name="days" required>
+<p class="form-element">How many days do you want to run this experiment for?</p>
+<select class="form-select" name="days" required>
+	<option disabled selected value> -- select an option -- </option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
     <option value="5">5</option>
+	<option value="6">6</option>
     <option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
     <option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
     <option value="14">14</option>
   </select>
 
-<p>We will text you everyday to see if you are sticking with the plan.</p> 
-<p>What is your phone number?</p>
-<select name="countryCode" id="">
-	<option data-countryCode="US" value="1">USA (+1)</option>
+<p class="form-element">We will text you everyday to see if you are sticking with the plan.</p> 
+<p class="form-element">What is your phone number?</p>
+<select class="form-select" id="country-code-select" name="countryCode" id="">
+	<option data-countryCode="US" value="1">USA (+1)</option><br>
 	<optgroup label="Other countries">
 		<option data-countryCode="DZ" value="213">Algeria (+213)</option>
 		<option data-countryCode="AD" value="376">Andorra (+376)</option>
@@ -238,9 +253,10 @@
 		<option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
 	</optgroup>
 </select>
-<input type="tel" id="phone" name="phone_number" pattern="[0-9]{10}" required>
-<p>What is your time zone?</p>
-<select name="timezone">
+<input class="form-input" type="tel" id="phone" name="phone_number" pattern="[0-9]{10}" required>
+<p class="form-element">What is your time zone?</p>
+<select class="form-select" id="timezone-select" name="timezone">
+	<option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
 	<option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
 	<option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
 	<option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
@@ -324,8 +340,9 @@
 	<option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
 	<option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00) Nuku'alofa</option>
 </select>
-<p>What time do you want to be texted?</p>
-<select name="message_time" required>
+<p class="form-element">What time do you want to be texted?</p>
+<select class="form-select" name="message_time" required>
+	<option disabled selected value> -- select an option -- </option>
     <option value="0">12:00 am</option>
     <option value="1">1:00 am</option>
     <option value="2">2:00 am</option>
@@ -351,7 +368,9 @@
     <option value="22">10:00 pm</option>
     <option value="23">11:00 pm</option>
   </select>
-  <p>
-
-<input type="submit" value="Get Started">
+<input class="button form-button" type="submit" value="Make my plan">
 </form>  
+</div>
+
+
+@stop
