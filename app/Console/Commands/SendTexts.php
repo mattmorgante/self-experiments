@@ -62,18 +62,24 @@ class SendTexts extends Command
                     )
                 );
             } else { 
-                $planDay = new PlanDay();
-                $planDay->plan_id = $plan->id;
-                $planDay->day_number = $diffInDays;
-                $planDay->save();
-                $approach = Approach::where('id', $plan->approach_id)->first();
-                $client->messages->create($plan->phone_number,
-                array(
-                    'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Did you ' . $approach->name . ' today?'
-                    )
-                );
+                $existingPlanDay = PlanDay::where('plan_id', $plan->id)
+                    ->where('created_at', '>', Carbon::now()->subDay())->first();
+                if ($existingPlanDay) { 
+                    return Command::SUCCESS;
+                } else { 
+                    $planDay = new PlanDay();
+                    $planDay->plan_id = $plan->id;
+                    $planDay->day_number = $diffInDays;
+                    $planDay->save();
+                    $approach = Approach::where('id', $plan->approach_id)->first();
+                    $client->messages->create($plan->phone_number,
+                    array(
+                        'from' => env('TWILIO_NUMBER'),
+                        'body' => 'Did you ' . $approach->name . ' today?'
+                        )
+                    );
 
+                }
             }
             
         }

@@ -32164,7 +32164,7 @@ body {
 
 .container {
   margin: auto;
-  width: 80%;
+  width: 95%;
   padding: 10px;
   margin-top: 50px;
   font-size: 24px;
@@ -32206,6 +32206,7 @@ h2 {
 
   .container {
     padding-top: 100px;
+    width: 80%;
   }
 
   .item {
@@ -32270,6 +32271,7 @@ h2 {
 
 #country-code-select {
   max-width: 150px;
+  margin-bottom: 10px;
 }
 
 #timezone-select {
