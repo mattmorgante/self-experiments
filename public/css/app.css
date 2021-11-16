@@ -32137,9 +32137,63 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.header {
+  height: 100px;
+  line-height: 100px;
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+  color: #f59e42;
+  font-weight: 600px;
+}
+
+.button {
+  margin: 0 auto;
+  display: block;
+  background-color: #f59e42;
+  color: white;
+  height: 40px;
+  width: 180px;
+  line-height: 40px;
+  border-radius: 10px;
+}
+
+.container {
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+  margin-top: 100px;
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+.hero-bullets {
+  padding: 40px;
+}
+
+#wrapper {
+  display: flex;
+}
+
+#left {
+  flex: 0 0 65%;
+}
+
+#screenshot {
+  max-height: 570px;
+}
+
+#right {
+  width: 20%;
+  flex: 1;
+  margin-top: 50px;
 }
 
 @media (min-width: 640px) {
@@ -188581,4 +188635,3 @@ select {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-
