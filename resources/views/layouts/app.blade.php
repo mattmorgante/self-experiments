@@ -17,7 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <header class="header">Self Experiments</header>
+        <header class="header"><h1>Self Experiments</h1></header>
         @yield('content')
     </body>
 </html>
