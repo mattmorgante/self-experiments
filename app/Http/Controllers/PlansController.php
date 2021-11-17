@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Goal;
 use App\Models\Approach;
 use App\Models\Plan;
+use App\Models\PlanDay;
 
 class PlansController extends Controller
 {
@@ -57,5 +58,24 @@ class PlansController extends Controller
 
     public function existing() {
         return view('existing');
+    }
+
+    public function summary() {
+        $plan = Plan::where('summary', request('summary'))->first();
+        $goal = Goal::where('id', $plan->goal_id)->first();
+        $approach = Approach::where('id', $plan->approach_id)->first();
+        $successDays = PlanDay::where('outcome', 1)->where('plan_id', $plan->id)->count();
+        $percentCompleted = $successDays / $plan->days;
+        $percentFriendly = number_format( $percentCompleted * 100, 0) . '%';
+        return view('summary')->with([
+            'plan' => $plan,
+            'success_days' => $successDays,
+            'percent' => $percentFriendly,
+            'initial' => $plan->goal_initial,
+            'end' => $plan->goal_end,
+            'approach_name' => $approach->name,
+            'goal_name' => $goal->name,
+            'measurement' => $goal->measurement
+        ]);
     }
 }

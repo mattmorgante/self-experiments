@@ -39,4 +39,6 @@ Route::get('/existing', [PlansController::class, 'existing']);
 
 Route::post('/incoming-sms', [SMSController::class, 'incoming']);
 
+Route::get('/completed-plan/{summary}', [PlansController::class, 'summary']);
+
 require __DIR__.'/auth.php';

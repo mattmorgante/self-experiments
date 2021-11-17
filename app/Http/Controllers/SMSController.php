@@ -24,13 +24,15 @@ class SMSController extends Controller
 
         if ($pendingPlan) { 
             \Log::info('completing plan');
+            $summary = md5($plan->id);
+            $pendingPlan->summary = $summary;
             $pendingPlan->status = 'COMPLETE';
             $pendingPlan->goal_end = $messageBody;
             $pendingPlan->save();
             $client->messages->create($phoneNumber,
                 array(
                     'from' => env('TWILIO_NUMBER'),
-                    'body' => 'Great work finishing your plan. Here is a link to your summary (TODO)'
+                    'body' => 'Great work finishing your plan. Here is a link to your summary: ' . env('APP_URL') . '/completed-plan' . '/' . $summary
                     )
                 );
             return true;
