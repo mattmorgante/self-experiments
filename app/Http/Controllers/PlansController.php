@@ -23,6 +23,11 @@ class PlansController extends Controller
 
     public function save() 
     { 
+        $existingPlan = Plan::where('phone_number', request('phone_number'))->where('status', 'ACTIVE')
+            ->first();
+        if ($existingPlan) { 
+            return redirect('/existing');
+        }
         $plan = new Plan();
         $plan->goal_id = request('goal_id');
         $plan->approach_id = request('approach_id');
@@ -48,5 +53,9 @@ class PlansController extends Controller
 
     public function thanks() {
         return view('thanks');
+    }
+
+    public function existing() {
+        return view('existing');
     }
 }

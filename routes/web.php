@@ -35,6 +35,7 @@ Route::get('/approaches/{goal_id}', [ApproachesController::class, 'index']);
 Route::get('/plan/{goal_id}/{approach_id}', [PlansController::class, 'show']);
 Route::post('/plan/save', [PlansController::class, 'save']);
 Route::get('/thanks', [PlansController::class, 'thanks']);
+Route::get('/existing', [PlansController::class, 'existing']);
 
 Route::post('/incoming-sms', [SMSController::class, 'incoming']);
 
