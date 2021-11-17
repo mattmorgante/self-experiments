@@ -4,9 +4,9 @@
 
 <div class="picker">
 @foreach ($approaches as $approach)
-    <div class="item">
-        <a href="/plan/{{ $goal->id }}/{{ $approach->id }}">{{ $approach->name }}</a>
-    </div>
+    <a class="item" href="/plan/{{ $goal->id }}/{{ $approach->id }}">
+            {{ $approach->name }}
+    </a>
 @endforeach
 </div>
 
